@@ -1,4 +1,6 @@
 import time
+import os
+import ftplib
 from datetime import datetime
 from gpiozero import MotionSensor
 from picamera import PiCamera
@@ -21,6 +23,7 @@ def thegrab():
     ftp.cwd('')
     ftp.storbinary("STOR " + filename, open(filename, 'rb'))
     ftp.quit()
+    os.remove(filename)
     
 while True:
     pir.wait_for_motion()
